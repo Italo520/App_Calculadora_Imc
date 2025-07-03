@@ -1,0 +1,33 @@
+# .gitignore padrão para projetos Flutter/Dart
+.dart_tool/
+.flutter-plugins/
+.flutter-plugins-dependencies/
+.idea/
+.vscode/
+.DS_Store
+.env
+.fvm/
+build/
+*.iml
+*.lock
+*.packages
+
+# Pastas e arquivos de iOS
+ios/.symlinks/
+ios/Flutter/Generated.xcconfig
+ios/Flutter/flutter_export_environment.sh
+ios/Flutter/App.framework
+ios/Flutter/Flutter.framework
+ios/Flutter/flutter_assets/
+
+# Pastas e arquivos de Android
+android/.gradle/
+android/local.properties
+android/key.properties
+android/build/
+android/app/build/
+android/app/*.apk
+android/app/*.aab
+
+# Pacotes de dependências
+/packages/
