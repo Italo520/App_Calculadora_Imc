@@ -1,0 +1,120 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+      ),
+      debugShowCheckedModeBanner: false,
+      home: CalculadoraDeImc(),
+    );
+  }
+}
+
+class CalculadoraDeImc extends StatefulWidget {
+  const CalculadoraDeImc({super.key});
+
+  @override
+  State<CalculadoraDeImc> createState() => _CalculadoraDeImcState();
+}
+
+class _CalculadoraDeImcState extends State<CalculadoraDeImc> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.grey[300],
+      // ignore: sized_box_for_whitespace
+      body: Container(
+        width: double.infinity,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              width: 300,
+              height: 300,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(150),
+                border: Border.all(width: 10, color: Colors.green),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    '24:22',
+                    style: TextStyle(fontSize: 42, color: Colors.green),
+                  ),
+                  SizedBox(height: 12),
+                  Text(
+                    'Peso Normal',
+                    style: TextStyle(fontSize: 20, color: Colors.green),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 40),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Column(
+                  children: [
+                    Text('Seu Peso'),
+                    // ignore: sized_box_for_whitespace
+                    Container(
+                      width: 75,
+                      child: TextField(
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          suffixText: 'kg',
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(width: 22),
+                Column(
+                  children: [
+                    Text('Sua Altura'),
+                    // ignore: sized_box_for_whitespace
+                    Container(
+                      width: 75,
+                      child: TextField(
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          suffixText: 'm',
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            SizedBox(height: 22),
+            ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.purple,
+                foregroundColor: Colors.white,
+              ),
+              child: const Text('Calcular'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

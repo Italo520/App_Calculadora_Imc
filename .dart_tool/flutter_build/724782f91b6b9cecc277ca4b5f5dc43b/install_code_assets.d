@@ -1,0 +1,1 @@
+ /home/italo/Documentos/ProjetosFlutter/calculadora_imc/.dart_tool/flutter_build/724782f91b6b9cecc277ca4b5f5dc43b/native_assets.json: 
