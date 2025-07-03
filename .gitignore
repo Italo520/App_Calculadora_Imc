@@ -26,7 +26,7 @@ android/local.properties
 android/key.properties
 android/build/
 android/app/build/
-android/app/*.apk # ESSA LINHA TAMBÉM É IMPORTANTE!
+android/app/*.apk
 android/app/*.aab
 
 # Pacotes de dependências
