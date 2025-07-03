@@ -7,7 +7,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -32,9 +31,9 @@ class _CalculadoraDeImcState extends State<CalculadoraDeImc> {
   TextEditingController pesoController = TextEditingController(text: '');
   TextEditingController alturaController = TextEditingController(text: '');
 
-  double imc;
-  String classificacao;
-  Color corResultado;
+  double? imc;
+  String? classificacao;
+  Color? corResultado;
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +49,7 @@ class _CalculadoraDeImcState extends State<CalculadoraDeImc> {
                 ? Text(
                     'Adicione valores de peso e altura \npara calcular o IMC',
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 20,
                       fontStyle: FontStyle.italic,
                       color: Colors.purple,
                     ),
@@ -61,18 +60,21 @@ class _CalculadoraDeImcState extends State<CalculadoraDeImc> {
                     height: 300,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(150),
-                      border: Border.all(width: 10, color: Colors.green),
+                      border: Border.all(
+                        width: 10,
+                        color: corResultado ?? Colors.grey,
+                      ),
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          '24:22',
+                          '${imc?.toStringAsFixed(2)}',
                           style: TextStyle(fontSize: 42, color: Colors.green),
                         ),
                         SizedBox(height: 12),
                         Text(
-                          'Peso Normal',
+                          classificacao ?? '',
                           style: TextStyle(fontSize: 20, color: Colors.green),
                         ),
                       ],
@@ -125,7 +127,15 @@ class _CalculadoraDeImcState extends State<CalculadoraDeImc> {
             ),
             SizedBox(height: 22),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                double peso = double.parse(pesoController.text);
+                double altura = double.parse(alturaController.text);
+                setState(() {
+                  imc = peso / (altura * altura);
+                  classificacao = getClassificacaoIMC(imc!);
+                  corResultado = getCorIMC(imc!);
+                });
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.purple,
                 foregroundColor: Colors.white,
@@ -137,5 +147,41 @@ class _CalculadoraDeImcState extends State<CalculadoraDeImc> {
         ),
       ),
     );
+  }
+
+  String? getClassificacaoIMC(double imc) {
+    if (imc <= 18.5) {
+      return 'Abaixo do Peso';
+    } else if (imc <= 24.9) {
+      return 'Peso Normal';
+    } else if (imc <= 29.9) {
+      return 'Sobrepeso';
+    } else if (imc <= 34.9) {
+      return 'Obesidade Grau I';
+    } else if (imc <= 39.9) {
+      return 'Obesidade Grau II';
+    } else if (imc >= 40.0) {
+      return 'Obesidade Grau III';
+    } else {
+      return null;
+    }
+  }
+
+  Color getCorIMC(double imc) {
+    if (imc <= 18.5) {
+      return Colors.brown;
+    } else if (imc <= 24.9) {
+      return Colors.blue;
+    } else if (imc <= 29.9) {
+      return Color(0xFFF4BE8E);
+    } else if (imc <= 34.9) {
+      return Color(0xFFEE9809);
+    } else if (imc <= 39.9) {
+      return Color(0xFFE44F38);
+    } else if (imc >= 40.0) {
+      return Colors.red;
+    } else {
+      return Colors.grey;
+    }
   }
 }
