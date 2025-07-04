@@ -31,14 +31,16 @@ class _CalculadoraDeImcState extends State<CalculadoraDeImc> {
   late TextEditingController pesoController;
   late TextEditingController alturaController;
 
+  double valorPeso = 0.0;
+  double valorAltura = 0.5;
   double? imc;
   String? classificacao;
   Color? corResultado;
 
   @override
   void initState() {
-    pesoController = TextEditingController(text: '');
-    alturaController = TextEditingController(text: '');
+    pesoController = TextEditingController(text: valorPeso.toString());
+    alturaController = TextEditingController(text: valorAltura.toString());
     super.initState();
   }
 
@@ -98,44 +100,74 @@ class _CalculadoraDeImcState extends State<CalculadoraDeImc> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Column(
-                  children: [
-                    Text('Seu Peso'),
-                    SizedBox(height: 10),
-                    Container(
-                      width: 75,
-                      child: TextField(
-                        controller: pesoController,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15),
+                Expanded(
+                  child: Column(
+                    children: [
+                      Text('Seu Peso'),
+                      SizedBox(height: 10),
+                      Container(
+                        width: 75,
+                        child: TextField(
+                          enabled: false,
+                          controller: pesoController,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            suffixText: 'kg',
                           ),
-                          suffixText: 'kg',
+                          keyboardType: TextInputType.number,
                         ),
-                        keyboardType: TextInputType.number,
                       ),
-                    ),
-                  ],
+                      Slider(
+                        value: valorPeso,
+                        activeColor: Colors.purple,
+                        onChanged: (peso) {
+                          setState(() {
+                            valorPeso = peso;
+                            pesoController.text = valorPeso.toString();
+                          });
+                        },
+                        min: 0,
+                        max: 250,
+                      ),
+                    ],
+                  ),
                 ),
                 SizedBox(width: 22),
-                Column(
-                  children: [
-                    Text('Sua Altura'),
-                    SizedBox(height: 10),
-                    Container(
-                      width: 75,
-                      child: TextField(
-                        controller: alturaController,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15),
+                Expanded(
+                  child: Column(
+                    children: [
+                      Text('Sua Altura'),
+                      SizedBox(height: 10),
+                      Container(
+                        width: 75,
+                        child: TextField(
+                          enabled: false,
+                          controller: alturaController,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            suffixText: 'm',
                           ),
-                          suffixText: 'm',
+                          keyboardType: TextInputType.number,
                         ),
-                        keyboardType: TextInputType.number,
                       ),
-                    ),
-                  ],
+                      Slider(
+                        value: valorAltura,
+                        activeColor: Colors.purple,
+                        onChanged: (altura) {
+                          setState(() {
+                            valorAltura = altura;
+                            alturaController.text = valorAltura.toString();
+                          });
+                        },
+                        min: 0.5,
+                        max: 2.50,
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -194,9 +226,9 @@ class _CalculadoraDeImcState extends State<CalculadoraDeImc> {
 
   Color getCorIMC(double imc) {
     if (imc <= 18.5) {
-      return Colors.brown;
-    } else if (imc <= 24.9) {
       return Colors.blue;
+    } else if (imc <= 24.9) {
+      return Colors.green;
     } else if (imc <= 29.9) {
       return Color(0xFFF4BE8E);
     } else if (imc <= 34.9) {
