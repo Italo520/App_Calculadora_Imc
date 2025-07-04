@@ -106,7 +106,7 @@ class _CalculadoraDeImcState extends State<CalculadoraDeImc> {
                       Text('Seu Peso'),
                       SizedBox(height: 10),
                       Container(
-                        width: 75,
+                        width: 95,
                         child: TextField(
                           enabled: false,
                           controller: pesoController,
@@ -119,17 +119,25 @@ class _CalculadoraDeImcState extends State<CalculadoraDeImc> {
                           keyboardType: TextInputType.number,
                         ),
                       ),
-                      Slider(
-                        value: valorPeso,
-                        activeColor: Colors.purple,
-                        onChanged: (peso) {
-                          setState(() {
-                            valorPeso = peso;
-                            pesoController.text = valorPeso.toString();
-                          });
-                        },
-                        min: 0,
-                        max: 250,
+                      SliderTheme(
+                        data: SliderThemeData(
+                          activeTickMarkColor: Colors.purple,
+                          trackHeight: 1.5,
+                        ),
+                        child: Slider(
+                          value: valorPeso,
+                          activeColor: Colors.purple,
+                          onChanged: (peso) {
+                            setState(() {
+                              valorPeso = peso;
+                              pesoController.text = valorPeso.toStringAsFixed(
+                                2,
+                              );
+                            });
+                          },
+                          min: 0,
+                          max: 250,
+                        ),
                       ),
                     ],
                   ),
@@ -154,17 +162,24 @@ class _CalculadoraDeImcState extends State<CalculadoraDeImc> {
                           keyboardType: TextInputType.number,
                         ),
                       ),
-                      Slider(
-                        value: valorAltura,
-                        activeColor: Colors.purple,
-                        onChanged: (altura) {
-                          setState(() {
-                            valorAltura = altura;
-                            alturaController.text = valorAltura.toString();
-                          });
-                        },
-                        min: 0.5,
-                        max: 2.50,
+                      SliderTheme(
+                        data: SliderThemeData(
+                          activeTickMarkColor: Colors.purple,
+                          trackHeight: 1.5,
+                        ),
+                        child: Slider(
+                          value: valorAltura,
+                          activeColor: Colors.purple,
+                          onChanged: (altura) {
+                            setState(() {
+                              valorAltura = altura;
+                              alturaController.text = valorAltura
+                                  .toStringAsFixed(2);
+                            });
+                          },
+                          min: 0.5,
+                          max: 2.50,
+                        ),
                       ),
                     ],
                   ),
