@@ -28,12 +28,26 @@ class CalculadoraDeImc extends StatefulWidget {
 }
 
 class _CalculadoraDeImcState extends State<CalculadoraDeImc> {
-  TextEditingController pesoController = TextEditingController(text: '');
-  TextEditingController alturaController = TextEditingController(text: '');
+  late TextEditingController pesoController;
+  late TextEditingController alturaController;
 
   double? imc;
   String? classificacao;
   Color? corResultado;
+
+  @override
+  void initState() {
+    pesoController = TextEditingController(text: '');
+    alturaController = TextEditingController(text: '');
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    pesoController.dispose();
+    alturaController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -128,13 +142,24 @@ class _CalculadoraDeImcState extends State<CalculadoraDeImc> {
             SizedBox(height: 22),
             ElevatedButton(
               onPressed: () {
-                double peso = double.parse(pesoController.text);
-                double altura = double.parse(alturaController.text);
-                setState(() {
-                  imc = peso / (altura * altura);
-                  classificacao = getClassificacaoIMC(imc!);
-                  corResultado = getCorIMC(imc!);
-                });
+                try {
+                  double peso = double.parse(pesoController.text);
+                  double altura = double.parse(alturaController.text);
+                  setState(() {
+                    imc = peso / (altura * altura);
+                    classificacao = getClassificacaoIMC(imc!);
+                    corResultado = getCorIMC(imc!);
+                  });
+                } on Exception {
+                  setState(() {
+                    imc = null;
+                    classificacao = null;
+                    corResultado = null;
+                    pesoController.text = '';
+                    alturaController.text = '';
+                  });
+                  print('Valor invalido!');
+                }
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.purple,
