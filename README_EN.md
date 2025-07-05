@@ -9,7 +9,9 @@
   <img src="https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white" alt="Dart Badge"/>
 </div>
 
-<h1 align="center">BMI Calculator 📱</h1>
+<h1 align="center">
+  BMI Calculator <img src="assets/icon.png" alt="Ícone do App" width="40"/>
+</h1>
 
 <p align="center">
   A simple and intuitive application to calculate Body Mass Index (BMI), developed with Flutter.

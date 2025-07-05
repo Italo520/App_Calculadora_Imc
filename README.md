@@ -9,7 +9,9 @@
   <img src="https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white" alt="Dart Badge"/>
 </div>
 
-<h1 align="center">Calculadora de IMC 📱</h1>
+<h1 align="center">
+  Calculadora de IMC <img src="assets/icon.png" alt="Ícone do App" width="40"/>
+</h1>
 
 <p align="center">
   Um aplicativo simples e intuitivo para calcular o Índice de Massa Corporal (IMC), desenvolvido com Flutter.
